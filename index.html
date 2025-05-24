@@ -14,12 +14,12 @@
   </video>
 
   <!-- ปุ่มควบคุมเสียง -->
-  <button id="muteButton">🔇</button>
+  <button id="muteButton">🔊</button>
 
   <!-- ชั้นหน้าเว็บ -->
   <div class="overlay">
     <div class="profile-image rotate-circle">
-      <img src="fang.jpg" alt="Your Profile" />
+      <img src="fang.jpg" alt="Your Profile"/>
     </div>
 
     <div class="button-container">
@@ -28,32 +28,7 @@
     </div>
   </div>
 
-  <script>
-    // Coming Soon Alert
-    const btn = document.getElementById('comingSoonBtn');
-    const alertBox = document.getElementById('customAlert');
-
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      alertBox.classList.add('show');
-      setTimeout(() => {
-        alertBox.classList.remove('show');
-      }, 1000);
-    });
-
-    // ปุ่ม mute/unmute
-    const video = document.getElementById('bg-video');
-    const muteBtn = document.getElementById('muteButton');
-    let isMuted = true;
-
-    video.muted = true; // เริ่มต้น mute เพื่อให้เล่นอัตโนมัติ
-
-    muteBtn.addEventListener('click', () => {
-      isMuted = !isMuted;
-      video.muted = isMuted;
-      muteBtn.textContent = isMuted ? '🔇' : '🔊';
-    });
-  </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
