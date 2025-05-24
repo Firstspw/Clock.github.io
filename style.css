@@ -1,4 +1,4 @@
-/* ป้องกันการเลื่อนหน้าจอ */
+/* ล็อกหน้าจอ */
 html, body {
   margin: 0;
   padding: 0;
@@ -7,7 +7,6 @@ html, body {
   overflow: hidden;
   font-family: 'Arial', sans-serif;
   color: white;
-  touch-action: none; /* ปิด gesture scroll บนมือถือ */
 }
 
 /* วิดีโอพื้นหลัง */
@@ -36,40 +35,36 @@ html, body {
   cursor: pointer;
 }
 
-/* พื้นที่แสดงเนื้อหา */
+/* ส่วนแสดงข้อมูลหลัก */
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  backdrop-filter: brightness(0.7);
+  height: 100vh;
+  width: 100vw;
   z-index: 1;
+  position: relative;
 }
 
-/* โปรไฟล์แบบน่ารักๆ */
+/* กรอบรูป */
 .profile-image {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
-  padding: 8px;
-  background: linear-gradient(135deg, #ff80ab, #ffd1dc, #ff80ab);
-  box-shadow: 0 0 20px rgba(255, 192, 203, 0.6);
-  animation: spin 10s linear infinite;
-  margin-bottom: 25px;
-  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff80ab, #ffd1dc);
+  padding: 5px;
+  box-shadow: 0 0 15px rgba(255, 192, 203, 0.5);
+  animation: spin 20s linear infinite;
+  margin-bottom: 20px;
 }
 .profile-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid white;
+  border: 3px solid white;
 }
 
 /* ปุ่มลิงก์ */
@@ -90,25 +85,58 @@ html, body {
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
 }
 .button-container a:hover {
   background-color: #f50057;
   transform: scale(1.05);
 }
 
+/* หน้าจออินโทร */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 1s ease;
+}
+.intro-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+.intro-box {
+  text-align: center;
+  color: white;
+}
+.intro-box button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.intro-box button:hover {
+  background-color: #f50057;
+}
+
 /* หมุนกรอบรูป */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
+  0% { transform: rotate(0); }
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive บนมือถือ */
+/* Responsive */
 @media screen and (max-width: 480px) {
   .profile-image {
-    width: 140px;
-    height: 140px;
+    width: 130px;
+    height: 130px;
   }
   .button-container a {
     font-size: 14px;
