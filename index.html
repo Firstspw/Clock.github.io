@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hello!!! I'm Fang</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
-  <!-- วิดีโอพื้นหลังแบบมีเสียง -->
-  <video id="bg-video" autoplay loop playsinline>
+<body>
+  <div id="cursor-glow"></div>
+
+  <!-- วิดีโอพื้นหลัง -->
+  <video id="bg-video" loop playsinline>
     <source src="background.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
   </video>
 
-  <!-- ปุ่มควบคุมเสียง -->
+  <!-- หน้าจอเริ่มต้น -->
+  <div id="startOverlay">
+    <div id="startText">Fang | Click to enter...</div>
+  </div>
+
+  <!-- ปุ่มปิดเสียง -->
   <button id="muteButton">🔊</button>
 
-  <!-- ชั้นหน้าเว็บ -->
-  <div class="overlay">
-    <div class="profile-image rotate-circle">
-      <img src="fang.jpg" alt="Your Profile"/>
+  <!-- เนื้อหาหลัก -->
+  <div id="mainContent">
+    <div class="profile-image">
+      <img src="fang.jpg" alt="Profile" />
     </div>
 
     <div class="button-container">
@@ -29,6 +38,6 @@
   </div>
 
   <script src="script.js"></script>
-
 </body>
+
 </html>
