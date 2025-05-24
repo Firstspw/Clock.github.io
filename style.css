@@ -1,144 +1,188 @@
-/* ล็อกหน้าจอ */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  font-family: 'Arial', sans-serif;
-  color: white;
-}
+  /* รีเซ็ต */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-/* วิดีโอพื้นหลัง */
-#bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-}
+  html,
+  body {
+    cursor: url('cursor.png') 6 2, auto;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+  }
 
-/* ปุ่ม mute */
-#muteButton {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  padding: 10px 14px;
-  font-size: 20px;
-  color: white;
-  border-radius: 50%;
-  cursor: pointer;
-}
+  video#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
 
-/* ส่วนแสดงข้อมูลหลัก */
-.overlay {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  z-index: 1;
-  position: relative;
-}
+  /* หน้าจอเริ่มต้น */
+  #startOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: opacity 1s ease;
+  }
 
-/* กรอบรูป */
-.profile-image {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: linear-gradient(135deg, #ff80ab, #ffd1dc);
-  padding: 5px;
-  box-shadow: 0 0 15px rgba(255, 192, 203, 0.5);
-  animation: spin 20s linear infinite;
-  margin-bottom: 20px;
-}
-.profile-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid white;
-}
+  #startOverlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
 
-/* ปุ่มลิงก์ */
-.button-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-  max-width: 300px;
-}
-.button-container a {
-  text-decoration: none;
-  background-color: #ff69b4;
-  color: white;
-  padding: 14px 20px;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s, transform 0.2s;
-}
-.button-container a:hover {
-  background-color: #f50057;
-  transform: scale(1.05);
-}
+  #startText {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 10px white, 0 0 20px #f0f;
+    cursor: pointer;
+  }
 
-/* หน้าจออินโทร */
-.intro-screen {
-  position: fixed;
-  inset: 0;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transition: opacity 1s ease;
-}
-.intro-screen.fade-out {
-  opacity: 0;
-  pointer-events: none;
-}
-.intro-box {
-  text-align: center;
-  color: white;
-}
-.intro-box button {
-  margin-top: 15px;
-  padding: 12px 24px;
-  font-size: 18px;
-  background-color: #ff4081;
-  color: white;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-}
-.intro-box button:hover {
-  background-color: #f50057;
-}
+  /* ปุ่ม mute */
+  #muteButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 
-/* หมุนกรอบรูป */
-@keyframes spin {
-  0% { transform: rotate(0); }
-  100% { transform: rotate(360deg); }
-}
+  /* เนื้อหาหลัก */
+  #mainContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+    z-index: 1;
+    position: relative;
+  }
 
-/* Responsive */
-@media screen and (max-width: 480px) {
+  #mainContent {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+
+  /* เมื่อพร้อมแสดง */
+  #mainContent.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
   .profile-image {
-    width: 130px;
-    height: 130px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #ffffff;
+    margin-bottom: 20px;
+    animation: rotate 8s linear infinite;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
   }
+
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    align-items: center;
+    /* จัดปุ่มให้อยู่ตรงกลาง */
+  }
+
   .button-container a {
-    font-size: 14px;
-    padding: 12px 16px;
+    text-decoration: none;
+    background-color: #ff4081;
+    color: white;
+    padding: 18px 30px;
+    /* ขนาดปุ่มใหญ่ขึ้น */
+    border-radius: 30px;
+    font-size: 18px;
+    /* ตัวอักษรใหญ่ขึ้น */
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    width: 220px;
+    /* กำหนดความกว้างของปุ่ม */
   }
-}
+
+  .button-container a:hover {
+    background-color: #f50057;
+    transform: scale(1.08);
+  }
+
+  .profile-image .button-container a {
+    text-decoration: none;
+    background-color: #ff4081;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .button-container a:hover {
+    background-color: #f50057;
+    transform: scale(1.05);
+  }
+
+  #cursor-glow {
+    /* ... */
+    transform: translate(-50%, -50%);
+  }
+
+  /* ใบไม้ */
+  .leaf {
+    position: fixed;
+    width: 15px;
+    height: 15px;
+    background-image: url('leaf.png');
+    /* ใช้ภาพใบไม้เล็กๆ */
+    background-size: cover;
+    opacity: 0.9;
+    pointer-events: none;
+    animation: fall 1s linear forwards;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(100px) rotate(180deg);
+      opacity: 0;
+    }
+  }
