@@ -1,31 +1,17 @@
+// ให้เสียงเล่นโดยอัตโนมัติเมื่อเปิดหน้าเว็บ
 const video = document.getElementById('bg-video');
 const muteBtn = document.getElementById('muteButton');
-const startBtn = document.getElementById('startButton');
-const introScreen = document.getElementById('introScreen');
-let isMuted = true;
+let isMuted = false; // เริ่มต้นเสียงเปิด
 
-// ตอนแรก mute ไว้ก่อน
-video.muted = true;
-muteBtn.textContent = '🔇';
-
-// เมื่อกดอนุญาต
-startBtn.addEventListener('click', () => {
-  video.muted = false;
-  video.play();
-  muteBtn.textContent = '🔊';
-
-  // ค่อยๆ หาย intro
-  introScreen.classList.add('fade-out');
-
-  // ปิดการมองเห็นหลัง transition
-  setTimeout(() => {
-    introScreen.style.display = 'none';
-  }, 1000);
+// ให้เสียงเล่นทันทีที่หน้าเว็บโหลด
+window.addEventListener('load', () => {
+  video.muted = isMuted; // กำหนดค่า mute หรือ unmute
 });
 
-// ปุ่ม mute/unmute
+// ฟังก์ชันสำหรับปุ่ม mute/unmute
 muteBtn.addEventListener('click', () => {
+  // เปลี่ยนสถานะเสียง
   isMuted = !isMuted;
-  video.muted = isMuted;
-  muteBtn.textContent = isMuted ? '🔇' : '🔊';
+  video.muted = isMuted; // ปรับเสียงของวิดีโอ
+  muteBtn.textContent = isMuted ? '🔇' : '🔊'; // เปลี่ยนสัญลักษณ์ปุ่ม
 });
