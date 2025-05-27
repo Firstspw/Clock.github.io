@@ -1,0 +1,186 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Press Start 2P', monospace;
+}
+
+video.bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.clock-container {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    margin-top: 8vh;
+}
+
+.clock {
+    font-size: 6vw;
+    display: flex;
+    gap: 0.5vw;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 0.15em;
+    text-shadow: 0 0 20px #000, 0 0 10px #000;
+}
+
+.digit {
+    position: relative;
+    width: 1.2em;
+    height: 1.2em; /* ความสูง container */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1em;
+    line-height: 1.2em;
+    color: #ffffff;
+    min-width: 1.2em;
+}
+
+.digit span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.2em;
+    line-height: 1.2em;
+    text-align: center;
+    will-change: transform, opacity;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    user-select: none;
+    z-index: 1;
+}
+
+/* Current number shown */
+.digit span.current {
+    transform: translateY(0);
+    opacity: 1;
+    z-index: 2;
+}
+
+/* New number goes from top down */
+.digit span.new {
+    transform: translateY(-100%);
+    opacity: 0;
+    z-index: 1;
+}
+
+/* When animation is triggered */
+.digit.animate span.new {
+    transform: translateY(0);
+    opacity: 1;
+    z-index: 3;
+}
+
+.digit.animate span.current {
+    transform: translateY(100%);
+    opacity: 0;
+    z-index: 0;
+}
+
+.colon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.7em;
+    animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    49% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0;
+    }
+}
+
+#volume-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+#music-toggle {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#music-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#volume-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid #ffffff;
+    border-radius: 6px;
+    padding: 8px;
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    width: 40px;
+    user-select: none;
+}
+
+#volume-bar {
+    width: 10px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    margin-bottom: 6px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+}
+
+#volume-fill {
+    width: 100%;
+    height: 50%;
+    background: #ffffff;
+    transition: height 0.2s ease;
+}
+
+#volume-percent {
+    font-size: 0.7rem;
+}
