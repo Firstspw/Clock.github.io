@@ -118,7 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
             hour12: false
         });
 
-        if (lastDigits.length === 0) {
+        // อัปเดต Title แท็บเว็บ
+        document.title = `${timeStr} - Clock Asia/Bangkok`;
+
+        if (lastDigits.length === 0) {  
             for (let i = 0; i < timeStr.length; i++) {
                 const isColon = timeStr[i] === ":";
                 const digit = createDigit(timeStr[i], isColon);
