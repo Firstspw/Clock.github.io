@@ -40,15 +40,15 @@ video.bg-video {
 
 .digit {
     position: relative;
-    width: 1.2em;
-    height: 1.2em; /* ความสูง container */
+    width: 1.1em;
+    height: 1.4em;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     font-size: 1em;
-    line-height: 1.2em;
+    line-height: 1.4em;
     color: #ffffff;
     min-width: 1.2em;
 }
@@ -58,8 +58,8 @@ video.bg-video {
     top: 0;
     left: 0;
     right: 0;
-    height: 1.2em;
-    line-height: 1.2em;
+    height: 1.4em;
+    line-height: 1.4em;
     text-align: center;
     will-change: transform, opacity;
     transition: transform 0.4s ease, opacity 0.4s ease;
@@ -67,21 +67,18 @@ video.bg-video {
     z-index: 1;
 }
 
-/* Current number shown */
 .digit span.current {
     transform: translateY(0);
     opacity: 1;
     z-index: 2;
 }
 
-/* New number goes from top down */
 .digit span.new {
     transform: translateY(-100%);
     opacity: 0;
     z-index: 1;
 }
 
-/* When animation is triggered */
 .digit.animate span.new {
     transform: translateY(0);
     opacity: 1;
@@ -93,6 +90,7 @@ video.bg-video {
     opacity: 0;
     z-index: 0;
 }
+
 
 .colon {
     display: flex;
